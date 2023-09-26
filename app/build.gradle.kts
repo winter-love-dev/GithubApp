@@ -38,11 +38,16 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
+    dataBinding {
+        enable = true
+    }
 }
 
 dependencies {
 
     implementation(project(":core:common"))
+    implementation(project(":appcore:domain:github"))
+//    implementation(project(":appcore:repository:github"))
 
     implementation(libs.bundles.default)
     implementation(libs.bundles.default.screen)

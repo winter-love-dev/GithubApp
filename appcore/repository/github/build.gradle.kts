@@ -2,11 +2,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.plugin.serialization)
 }
 
 android {
-    namespace = "com.season.winter.core.common"
+    namespace = "com.season.winter.githubapp.appcore.repository.github"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -32,17 +31,16 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
-    dataBinding {
-        enable = true
-    }
 }
 
 dependencies {
+
+    implementation(project(":appcore:domain:github"))
 
     implementation(libs.bundles.default)
     implementation(libs.bundles.default.screen)
     testImplementation(libs.bundles.default.test.implementation)
     androidTestImplementation(libs.bundles.default.test.androidTestImplementation)
-    implementation(libs.bundles.kotlinx.serialization)
 
+    implementation(libs.bundles.rest.api)
 }

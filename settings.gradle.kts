@@ -19,3 +19,6 @@ include(":core")
 include(":core:common")
 
 include(":feature")
+
+include(":appcore:domain:github")
+include(":appcore:repository:github")

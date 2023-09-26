@@ -1,11 +1,10 @@
 package com.season.winter.githubapp
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import com.season.winter.core.common.activity.BaseActivity
+import com.season.winter.githubapp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity: BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+    override fun ActivityMainBinding.initView() {
+        greeting = "hello~"
     }
 }
