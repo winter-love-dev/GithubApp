@@ -1,20 +1,19 @@
-package com.season.winter.core.common.fragment.util
+package com.season.winter.core.common.util.fragment
 
 import android.content.Context
 import androidx.fragment.app.FragmentActivity
+import com.season.winter.core.common.domain.FragmentService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ActivityContext
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ActivityComponent::class)
 object FragmentUtilModule {
 
     @Provides
-    @Singleton
     fun provideFragmentService(
         @ActivityContext context: Context,
     ): FragmentService {

@@ -12,26 +12,28 @@ import com.season.winter.githubapp.appcore.domain.github.entity.GithubUserEntity
 class SearchGithubUserResultAdapter: ListAdapter<GithubUserEntity, RecyclerView.ViewHolder>(GithubUserDiffCallback()) {
 
     private var totalSearchResult = 0
-    private var onClickLike: ((userId: Int) -> Unit)? = null
 
-    override fun getItemCount(): Int = currentList.size + RemainingSummarySize
+//    override fun getItemCount(): Int = currentList.size + RemainingSummarySize
+    override fun getItemCount(): Int = currentList.size
 
-    override fun getItemViewType(position: Int): Int = when(position) {
-        Summary -> Summary
-        else -> User
-    }
+//    override fun getItemViewType(position: Int): Int = when(position) {
+//        Summary -> Summary
+//        else -> User
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when(viewType) {
-            Summary -> SummaryViewHolder(parent)
-            else -> SearchUserViewHolder(parent)
-        }
+        return SearchUserViewHolder(parent)
+//        return when(viewType) {
+//            Summary -> SummaryViewHolder(parent)
+//            else -> SearchUserViewHolder(parent)
+//        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is SummaryViewHolder -> holder.binding(totalSearchResult)
-            is SearchUserViewHolder -> holder.binding(currentList[position - RemainingSummarySize])
+//            is SearchUserViewHolder -> holder.binding(currentList[position - RemainingSummarySize])
+            is SearchUserViewHolder -> holder.binding(currentList[position])
         }
     }
 
@@ -41,9 +43,14 @@ class SearchGithubUserResultAdapter: ListAdapter<GithubUserEntity, RecyclerView.
         submitList(it)
     }
 
-    fun refresh(data: GithubSearchResponse) {
+    fun refresh(data: GithubSearchResponse){
         totalSearchResult = data.totalCount
         submitList(data.users)
+    }
+
+    fun clear() = currentList.toMutableList().also {
+        it.clear()
+        submitList(it)
     }
 
     companion object {

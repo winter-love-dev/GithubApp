@@ -1,7 +1,8 @@
-package com.season.winter.core.common.fragment.util
+package com.season.winter.core.common.domain
 
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.season.winter.core.common.util.fragment.SelectFragmentTransaction
 
 interface FragmentService {
 

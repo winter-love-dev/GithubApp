@@ -13,6 +13,6 @@ class SummaryViewHolder(
 ): ViewHolder(binding.root) {
 
     fun binding(totalCount: Int) {
-        binding.totalCount = totalCount.toString()
+        // binding.totalCount = "total: $totalCount"
     }
 }

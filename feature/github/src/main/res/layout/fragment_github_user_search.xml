@@ -7,28 +7,63 @@
 
         <import type="com.season.winter.feature.github.recyclerview.SearchGithubUserResultAdapter" />
         <import type="com.season.winter.core.common.util.LayoutManagerType" />
+        <import type="com.season.winter.feature.github.fragment.GithubUserSearchFragment"/>
+        <import type="com.season.winter.feature.github.viewmodel.GithubViewModel"/>
+
+        <variable
+            name="adapter"
+            type="SearchGithubUserResultAdapter" />
 
         <variable
             name="layoutManagerType"
             type="LayoutManagerType" />
 
         <variable
-            name="adapter"
-            type="SearchGithubUserResultAdapter" />
+            name="fragment"
+            type="GithubUserSearchFragment"/>
+
+        <variable
+            name="github_view_model"
+            type="GithubViewModel"/>
+
+        <variable
+            name="count"
+            type="String"/>
 
     </data>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            app:changeLayoutManagerFromType="@{layoutManagerType}"
-            app:adapter="@{adapter}"
-            tools:listitem="@layout/item_search_user"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
 
-    </LinearLayout>
+            <include layout="@layout/item_search_bar"
+                app:count="@{count}"
+                app:fragment="@{fragment}"/>
+            <!--        app:search_bar_view_model="@{github_view_model}"-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_weight="1"
+                app:changeLayoutManagerFromType="@{layoutManagerType}"
+                app:adapter="@{adapter}"
+                tools:listitem="@layout/item_search_user"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:onClick="@{() -> fragment.onClickClearResult()}"
+            android:layout_margin="20dp"
+            android:layout_gravity="bottom|end"
+            android:text="clear"
+            android:layout_width="80dp"
+            android:layout_height="40dp"/>
+
+    </FrameLayout>
+
 </layout>

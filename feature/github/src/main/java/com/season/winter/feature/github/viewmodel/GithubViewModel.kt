@@ -1,30 +1,38 @@
 package com.season.winter.feature.github.viewmodel
 
-import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import com.season.winter.core.common.fragment.util.FragmentService
-import com.season.winter.feature.github.fragment.GithubUserSearchFragment
+import androidx.lifecycle.viewModelScope
 import com.season.winter.githubapp.appcore.domain.github.GithubRestApiService
 import com.season.winter.githubapp.appcore.domain.github.entity.GithubSearchResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class GithubViewModel @Inject constructor(
     private val service: GithubRestApiService,
-    private val fragmentService: FragmentService
-): ViewModel(){
+): ViewModel() {
+
+    private val _onSearchUserResult = MutableSharedFlow<GithubSearchResponse>(
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST,
+    )
+    val onSearchUserResult: SharedFlow<GithubSearchResponse>
+        get() = _onSearchUserResult.asSharedFlow()
 
     suspend fun callTest(): GithubSearchResponse {
         return service.searchUser("winter-love", 20, 1)
     }
 
-    fun startFragment(
-        frameBase: View,
-        fragment: Fragment = GithubUserSearchFragment()
-    ) {
-        fragmentService.startFragment(frameBase, fragment)
+    fun searchUser(query: String) {
+        viewModelScope.launch{
+            val result = service.searchUser(query, 30, 1)
+            _onSearchUserResult.tryEmit(result)
+        }
     }
 
     companion object {

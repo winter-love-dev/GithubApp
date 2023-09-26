@@ -1,4 +1,4 @@
-package com.season.winter.core.common.fragment.util
+package com.season.winter.core.common.util.fragment
 
 import android.util.Log
 import androidx.fragment.app.FragmentTransaction
