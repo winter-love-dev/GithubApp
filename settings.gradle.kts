@@ -15,4 +15,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "GithubApp"
 include(":app")
- 
+include(":core")
+include(":core:common")
+
+include(":feature")
