@@ -49,6 +49,8 @@ dependencies {
     implementation(project(":appcore:domain:github"))
 //    implementation(project(":appcore:repository:github"))
 
+    implementation(project(":feature:github"))
+
     implementation(libs.bundles.default)
     implementation(libs.bundles.default.screen)
     testImplementation(libs.bundles.default.test.implementation)

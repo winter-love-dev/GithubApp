@@ -22,3 +22,4 @@ include(":feature")
 
 include(":appcore:domain:github")
 include(":appcore:repository:github")
+include(":feature:github")
