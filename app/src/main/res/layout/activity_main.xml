@@ -5,15 +5,11 @@
 
     <data>
 
-        <import type="com.season.winter.githubapp.MainActivity" />
+        <import type="com.season.winter.githubapp.feature.main.MainActivity" />
 
         <variable
             name="activity"
-            type="MainActivity"/>
-
-        <variable
-            name="greeting"
-            type="String"/>
+            type="com.season.winter.githubapp.feature.main.MainActivity"/>
 
     </data>
 

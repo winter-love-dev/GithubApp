@@ -3,6 +3,9 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.plugin.serialization)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.devtools.ksp)
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
@@ -45,4 +48,9 @@ dependencies {
     androidTestImplementation(libs.bundles.default.test.androidTestImplementation)
     implementation(libs.bundles.kotlinx.serialization)
 
+    annotationProcessor(libs.bundles.glide.compiler.annotationProcessor)
+    implementation(libs.bundles.glide)
+
+    implementation(libs.bundles.hilt)
+    kapt(libs.bundles.hilt.compiler.kapt)
 }

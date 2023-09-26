@@ -1,6 +1,6 @@
 package com.season.winter.githubapp.appcore.repository.github.network
 
-import com.season.winter.githubapp.appcore.domain.github.domain.GithubRestApiService
+import com.season.winter.githubapp.appcore.domain.github.GithubRestApiService
 import com.season.winter.githubapp.appcore.repository.github.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

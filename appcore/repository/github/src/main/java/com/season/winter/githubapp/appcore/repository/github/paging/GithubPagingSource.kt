@@ -2,7 +2,7 @@ package com.season.winter.githubapp.appcore.repository.github.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.season.winter.githubapp.appcore.domain.github.domain.GithubRestApiService
+import com.season.winter.githubapp.appcore.domain.github.GithubRestApiService
 import com.season.winter.githubapp.appcore.domain.github.entity.GithubUserEntity
 import com.season.winter.githubapp.appcore.repository.github.GithubRepository
 import kotlin.math.ceil

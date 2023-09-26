@@ -1,6 +1,6 @@
 package com.season.winter.githubapp.appcore.repository.github.di
 
-import com.season.winter.githubapp.appcore.domain.github.domain.GithubRestApiService
+import com.season.winter.githubapp.appcore.domain.github.GithubRestApiService
 import com.season.winter.githubapp.appcore.repository.github.network.GithubRestApiManager
 import dagger.Module
 import dagger.Provides

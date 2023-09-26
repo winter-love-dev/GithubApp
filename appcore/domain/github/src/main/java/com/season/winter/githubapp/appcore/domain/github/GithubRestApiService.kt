@@ -1,4 +1,4 @@
-package com.season.winter.githubapp.appcore.domain.github.domain
+package com.season.winter.githubapp.appcore.domain.github
 
 import com.season.winter.githubapp.appcore.domain.github.entity.GithubSearchResponse
 import retrofit2.http.GET

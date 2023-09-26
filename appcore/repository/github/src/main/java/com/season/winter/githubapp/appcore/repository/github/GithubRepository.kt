@@ -3,7 +3,7 @@ package com.season.winter.githubapp.appcore.repository.github
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.season.winter.githubapp.appcore.domain.github.domain.GithubRestApiService
+import com.season.winter.githubapp.appcore.domain.github.GithubRestApiService
 import com.season.winter.githubapp.appcore.domain.github.entity.GithubUserEntity
 import com.season.winter.githubapp.appcore.repository.github.paging.GithubPagingSource
 import kotlinx.coroutines.flow.Flow

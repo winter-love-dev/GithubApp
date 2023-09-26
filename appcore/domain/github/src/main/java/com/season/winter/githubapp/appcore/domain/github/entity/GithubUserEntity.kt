@@ -3,6 +3,7 @@ package com.season.winter.githubapp.appcore.domain.github.entity
 import com.google.gson.annotations.SerializedName
 
 data class GithubUserEntity(
+    var liked: Boolean = false,
     @field:SerializedName("login") val login: String,
     @field:SerializedName("id") val id: Long,
     @field:SerializedName("node_id") val nodeId: String,

@@ -1,10 +1,10 @@
-package com.season.winter.core.common.fragment
+package com.season.winter.core.common.fragment.util
 
 import android.util.Log
 import androidx.fragment.app.FragmentTransaction
 import java.lang.Exception
 
-enum class SelectTransaction{
+enum class SelectFragmentTransaction{
     Commit,
     CommitAllowingStateLoss,
     CommitNow,
@@ -13,18 +13,18 @@ enum class SelectTransaction{
 }
 
 fun FragmentTransaction.safeCommit(
-    transaction: SelectTransaction = SelectTransaction.Commit
+    transaction: SelectFragmentTransaction = SelectFragmentTransaction.Commit
 ) {
 
     try {
         when(transaction) {
-            SelectTransaction.Commit ->
+            SelectFragmentTransaction.Commit ->
                 commit()
-            SelectTransaction.CommitAllowingStateLoss ->
+            SelectFragmentTransaction.CommitAllowingStateLoss ->
                 commitAllowingStateLoss()
-            SelectTransaction.CommitNow ->
+            SelectFragmentTransaction.CommitNow ->
                 commitNow()
-            SelectTransaction.CommitNowAllowingStateLoss ->
+            SelectFragmentTransaction.CommitNowAllowingStateLoss ->
                 commitNowAllowingStateLoss()
         }
     } catch (e: Exception) {
