@@ -56,7 +56,6 @@ dependencies {
     implementation(libs.bundles.hilt)
     kapt(libs.bundles.hilt.compiler.kapt)
 
-    annotationProcessor(libs.bundles.glide.compiler.annotationProcessor)
-    implementation(libs.bundles.glide)
+    implementation(libs.bundles.rest.api)
 
 }

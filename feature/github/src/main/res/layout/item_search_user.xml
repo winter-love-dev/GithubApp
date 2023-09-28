@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.season.winter.feature.github.recyclerview.holder.SearchUserViewHolder"/>
+
         <variable
             name="name"
             type="String"/>
@@ -16,6 +18,10 @@
         <variable
             name="liked"
             type="java.lang.Boolean"/>
+
+        <variable
+            name="view_holder"
+            type="SearchUserViewHolder"/>
 
     </data>
 
@@ -56,6 +62,7 @@
                     tools:ignore="NestedWeights" />
 
                 <ImageView
+                    android:onClick="@{() -> view_holder.onClickLiked()}"
                     android:src="@drawable/like_outlined"
                     app:bindLikeStateFromBoolean="@{liked}"
                     android:layout_width="45dp"

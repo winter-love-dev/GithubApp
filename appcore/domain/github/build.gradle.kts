@@ -2,6 +2,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.devtools.ksp)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -40,4 +42,9 @@ dependencies {
     androidTestImplementation(libs.bundles.default.test.androidTestImplementation)
 
     implementation(libs.bundles.rest.api)
+
+    ksp(libs.bundles.room.compiler.ksp)
+    annotationProcessor(libs.bundles.room.compiler.annotationProcessor)
+    testImplementation(libs.bundles.room.testing.testImplementation)
+    implementation(libs.bundles.room)
 }

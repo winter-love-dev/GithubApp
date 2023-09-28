@@ -38,7 +38,7 @@
                 app:queryBackground="@drawable/searchview_background"
                 app:iconifiedByDefault="false"
                 app:queryHint="search user ..."
-                app:bindQueryText="@{fragment.onQueryChangeTextListener}"
+                app:bindQueryText="@{fragment.viewModel.onQueryChangeTextListener}"
                 android:layout_height="match_parent"/>
 
             <ImageView

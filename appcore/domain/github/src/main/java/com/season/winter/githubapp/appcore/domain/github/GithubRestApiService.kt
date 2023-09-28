@@ -8,9 +8,9 @@ interface GithubRestApiService {
 
     @GET("search/users")
     suspend fun searchUser(
-        @Query("q") name: String,
-        @Query("per_page") resultCountLimit: Int,
-        @Query("page") page: Int,
+        @Query("q") query: String,
+        @Query("per_page") resultCountLimit: Int = 30,
+        @Query("page") page: Int = 1,
     ): GithubSearchResponse
 
 }

@@ -56,6 +56,11 @@ dependencies {
 
     implementation(libs.bundles.hilt)
     kapt(libs.bundles.hilt.compiler.kapt)
+
+    ksp(libs.bundles.room.compiler.ksp)
+    annotationProcessor(libs.bundles.room.compiler.annotationProcessor)
+    testImplementation(libs.bundles.room.testing.testImplementation)
+    implementation(libs.bundles.room)
 }
 
 fun getGithubRestApiAccess(): String {

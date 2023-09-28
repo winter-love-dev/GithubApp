@@ -43,7 +43,7 @@ org-jetbrains-kotlin-plugin-serialization = "1.8.0"
 org-jetbrains-kotlinx-serialization-json = "1.5.1"
 
 # rest api
-gson = "2.9.0"
+gson = "2.10.1"
 okhttpLogging = "4.10.0"
 retrofit = "2.9.0"
 paging = "3.2.1"
