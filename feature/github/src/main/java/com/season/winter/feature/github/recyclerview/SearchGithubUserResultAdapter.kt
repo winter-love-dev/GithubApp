@@ -1,6 +1,5 @@
 package com.season.winter.feature.github.recyclerview
 
-import android.util.Log
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import com.season.winter.feature.github.recyclerview.holder.SearchUserViewHolder
@@ -13,7 +12,7 @@ class SearchGithubUserResultAdapter(
 ): PagingDataAdapter<GithubUserEntity, SearchUserViewHolder>(GithubUserDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchUserViewHolder {
-        return SearchUserViewHolder(parent, viewModel = viewModel)
+        return SearchUserViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: SearchUserViewHolder, position: Int) {
@@ -28,13 +27,11 @@ class SearchGithubUserResultAdapter(
     }
 
     private fun changeLiked(position: Int) {
-        Log.e("TAG", "changeLiked: position: $position", )
         (snapshot()[position] ?: return).also {
-            Log.e("TAG", "changeLiked: before: ${it.liked}")
+            viewModel.updateLikedState(it)
             it.liked = it.liked.not()
-            Log.e("TAG", "changeLiked: after: ${it.liked}", )
+            notifyItemChanged(position)
         }
-        notifyItemChanged(position)
     }
 
 
