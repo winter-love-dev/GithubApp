@@ -18,7 +18,6 @@ androidx-test-ext = "1.1.5" # testImplementation
 androidx-test-espresso-core = "3.5.1" # testImplementation
 androidx-lifecycle-runtime-ktx = "2.6.2"
 androidx-lifecycle-viewmodel-ktx = "2.6.2"
-androidx-work-runtime-ktx = "2.8.1" # Kotlin + coroutines
 
 androidx-room = "2.5.2"
 
@@ -31,7 +30,7 @@ com-google-gms-google-services = "4.3.15"
 com-google-dagger-hilt-android-plugins = "2.44"
 com-google-dagger-hilt-android = "2.46.1"
 com-google-dagger-hilt-compiler = "2.44" # kapt
-com-google-dagger-hilt-work = "1.0.0"
+
 
 com-google-github-bumptech-glide-compiler = "4.12.0" # annotationProcessor
 com-google-github-bumptech-glide = "4.15.1"
@@ -47,6 +46,10 @@ gson = "2.10.1"
 okhttpLogging = "4.10.0"
 retrofit = "2.9.0"
 paging = "3.2.1"
+
+# WorkerManager
+#androidx-work-runtime-ktx = "2.8.1" # Kotlin + coroutines
+#com-google-dagger-hilt-work = "1.0.0"
 
 # firebase
 #com-google-firebase-bom = "32.3.1"
@@ -94,12 +97,8 @@ androidx-room-compiler-annotationProcessor = { module = "androidx.room:room-comp
 androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "androidx-room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" } # ksp
 androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "androidx-room" }
-androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "androidx-work-runtime-ktx" }
-androidx-work-gcm = { module = "androidx.work:work-gcm", version.ref = "androidx-work-runtime-ktx" } # optional - GCMNetworkManager support
-androidx-work-multiprocess = { module = "androidx.work:work-multiprocess", version.ref = "androidx-work-runtime-ktx" } # optional - Multiprocess support
 com-google-dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "com-google-dagger-hilt-android" }
 com-google-dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "com-google-dagger-hilt-compiler" } # kapt
-com-google-dagger-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "com-google-dagger-hilt-work" } # kapt
 com-google-github-bumptech-glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "com-google-github-bumptech-glide-compiler" }
 com-google-github-bumptech-glide = { module = "com.github.bumptech.glide:glide", version.ref = "com-google-github-bumptech-glide" }
 junit = { module = "junit:junit", version.ref = "junit" }
@@ -111,6 +110,12 @@ okhttp3-logging-interceptor = { module = "com.squareup.okhttp3:logging-intercept
 retrofit2 = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit2-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 androidx-paging-runtime-ktx = { module = "androidx.paging:paging-runtime-ktx", version.ref = "paging" }
+
+# WorkerManager
+#androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "androidx-work-runtime-ktx" }
+#androidx-work-gcm = { module = "androidx.work:work-gcm", version.ref = "androidx-work-runtime-ktx" } # optional - GCMNetworkManager support
+#androidx-work-multiprocess = { module = "androidx.work:work-multiprocess", version.ref = "androidx-work-runtime-ktx" } # optional - Multiprocess support
+#com-google-dagger-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "com-google-dagger-hilt-work" } # kapt
 
 # Firebase
 #com-google-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "com-google-firebase-bom" }
@@ -163,7 +168,6 @@ navigation = [
 ]
 hilt = [
     "com-google-dagger-hilt-android",
-    "com-google-dagger-hilt-work"
 ]
 hilt-compiler-kapt = [ "com-google-dagger-hilt-compiler" ]
 room-compiler-annotationProcessor = [ "androidx-room-compiler-annotationProcessor" ]
@@ -177,14 +181,6 @@ room = [
 ]
 glide-compiler-annotationProcessor = [ "com-google-github-bumptech-glide-compiler" ]
 glide = [ "com-google-github-bumptech-glide" ]
-workmanager-default = [
-    "androidx-work-runtime-ktx",
-]
-workmanager-all = [
-    "androidx-work-runtime-ktx",
-    "androidx-work-gcm", # optional - GCMNetworkManager support
-    "androidx-work-multiprocess",# optional - Multiprocess support
-]
 rest-api = [
     "gson",
     "okhttp3-logging-interceptor",
@@ -192,6 +188,16 @@ rest-api = [
     "retrofit2-converter-gson",
     "androidx-paging-runtime-ktx"
 ]
+
+#workmanager-default = [
+#    "androidx-work-runtime-ktx",
+#]
+#workmanager-all = [
+#    "androidx-work-runtime-ktx",
+#    "androidx-work-gcm", # optional - GCMNetworkManager support
+#    "androidx-work-multiprocess",# optional - Multiprocess support
+#    "com-google-dagger-hilt-work" - Hilt support
+#]
 
 #firebase-bom = [ "com-google-firebase-bom" ]
 #firebase = [

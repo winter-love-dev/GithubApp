@@ -12,7 +12,6 @@ class SearchUserViewHolder(
     layoutInflater: LayoutInflater = LayoutInflater.from(parent.context),
     private val binding: ItemSearchUserBinding =
         ItemSearchUserBinding.inflate(layoutInflater, parent, false),
-    private val viewModel: GithubViewModel
 ): ViewHolder(binding.root) {
 
 
@@ -24,7 +23,6 @@ class SearchUserViewHolder(
     }
 
     fun onClickLiked() {
-        viewModel.updateLikedState(userData ?: return)
         onClickLike?.invoke()
     }
 

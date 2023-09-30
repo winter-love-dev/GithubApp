@@ -24,7 +24,7 @@ class FragmentServiceImpl @Inject constructor(
             replace(frameBase.id, fragment)
             if (addToBackStack)
                 addToBackStack(fragment::class.java.simpleName)
-            safeCommit(transaction)
+            selectFragmentTransition(transaction)
         }
     }
 
@@ -43,7 +43,7 @@ class FragmentServiceImpl @Inject constructor(
         transaction: SelectFragmentTransaction,
     ) = fragmentActivity.supportFragmentManager.beginTransaction().run {
         remove(fragment)
-        safeCommit(transaction)
+        selectFragmentTransition(transaction)
     }
 
     override fun currentFragment(frameBase: View): Fragment? =

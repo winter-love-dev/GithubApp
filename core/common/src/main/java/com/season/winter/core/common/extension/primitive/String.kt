@@ -5,16 +5,16 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 
 inline fun <reified T> String.decodeFromJsonStringSafety(): T? {
-    return try {
+    return runCatching {
         val jsonOption = Json {
             ignoreUnknownKeys = true
         }
         jsonOption.decodeFromString<T>(this)
-    } catch (e: SerializationException) {
+    }.onFailure { e ->
         Log.e(
             "Json.decodeFromStringSafety",
             "SerializationException: ${e.message}"
         )
-        null
-    }
+    }.getOrNull()
 }
+

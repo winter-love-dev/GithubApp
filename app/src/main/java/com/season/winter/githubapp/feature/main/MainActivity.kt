@@ -19,7 +19,6 @@ class MainActivity: BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     lateinit var fragmentManager: FragmentService
 
     override fun ActivityMainBinding.initView() {
-        activity = this@MainActivity
         fragmentManager.startFragment(
             fragmentContainer,
             GithubUserSearchFragment()

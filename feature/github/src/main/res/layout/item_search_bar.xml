@@ -43,7 +43,7 @@
 
             <ImageView
                 android:padding="8dp"
-                android:onClick="@{() -> fragment.onClickSearchButton()}"
+                android:onClick="@{() -> fragment.viewModel.onClickSearchButton()}"
                 android:src="@drawable/arrow_navi_right"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"/>

@@ -1,6 +1,5 @@
 package com.season.winter.githubapp.appcore.repository.github.paging
 
-import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -9,7 +8,6 @@ import androidx.room.withTransaction
 import com.season.winter.githubapp.appcore.domain.github.GithubRestApiService
 import com.season.winter.githubapp.appcore.domain.github.entity.GithubSearchUserSummaryEntity
 import com.season.winter.githubapp.appcore.domain.github.entity.GithubUserEntity
-import com.season.winter.githubapp.appcore.domain.github.entity.GithubUserLikeEntity
 import com.season.winter.githubapp.appcore.domain.github.entity.RemoteKey
 import com.season.winter.githubapp.appcore.repository.github.database.GithubLocalDatabase
 import com.season.winter.githubapp.appcore.repository.github.paging.test.BaseRemoteMediator.Companion.PageLimit
@@ -102,8 +100,8 @@ class GithubUserRemoteMediator(
                 if (loadType == LoadType.REFRESH)
                     clearCache()
 
-                val remoteKey = RemoteKey(query,nextKey - 1, nextKey)
-                remoteKeyDao.insertOrReplace(remoteKey)
+                val newRemoteKey = RemoteKey(query,nextKey - 1, nextKey)
+                remoteKeyDao.insertOrReplace(newRemoteKey)
 
                 val summary = GithubSearchUserSummaryEntity(query, response.totalCount, calculateTotalPage)
                 userDao.insertSearchSummary(summary)
