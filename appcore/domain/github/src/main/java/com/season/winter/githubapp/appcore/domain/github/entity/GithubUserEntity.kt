@@ -45,9 +45,10 @@ data class GithubUserEntity(
     @field:SerializedName("type") val type: String,
     @field:SerializedName("site_admin") val siteAdmin: Boolean,
     @field:SerializedName("score") val score: Double,
-) {
+)/* {
 
-
+    // GithubUserDiffCallback 상에서 어차피 id 비교를 하기 때문에 지금은 필요 없음.
+    // areItemsTheSame 상에서 먼저 거르면 한 단 계 더 빠르긴 할텐데 굳이?
     // 객체의 동등성을 id 값으로 비교
     override fun equals(other: Any?): Boolean {
         return other is GithubUserEntity && id == other.id
@@ -56,4 +57,4 @@ data class GithubUserEntity(
     override fun hashCode(): Int {
         return id?.hashCode() ?: 0
     }
-}
+}*/
