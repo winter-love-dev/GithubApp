@@ -12,7 +12,7 @@ enum class SelectFragmentTransaction{
     ;
 }
 
-fun FragmentTransaction.safeCommit(
+fun FragmentTransaction.selectFragmentTransition(
     transaction: SelectFragmentTransaction = SelectFragmentTransaction.Commit
 ) {
 
