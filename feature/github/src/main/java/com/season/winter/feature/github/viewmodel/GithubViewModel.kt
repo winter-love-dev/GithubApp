@@ -25,13 +25,12 @@ class GithubViewModel @Inject constructor(
     private val repository: GithubRepository,
 ): ViewModel() {
 
-
     private var currentQuery = ""
     private var lastQuery = ""
 
     val onQueryChangeTextListener = fun(query: String) {
-        this.currentQuery = query
-        if (this.currentQuery.isEmpty())
+        currentQuery = query
+        if (currentQuery.isEmpty())
             clearSearchUserCache()
     }
 
@@ -64,10 +63,12 @@ class GithubViewModel @Inject constructor(
     }
 
     fun clearSearchUserCache() {
+        if (lastQuery.isEmpty()) return
         searchJob?.cancel()
         summaryJob?.cancel()
         viewModelScope.launch {
             repository.clearSearchUserCache(lastQuery)
+            lastQuery = ""
             _onClearedCache.emit(true)
         }
     }
@@ -76,7 +77,7 @@ class GithubViewModel @Inject constructor(
         lastQuery = currentQuery
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
-            repository.getSearchUserResultStream(currentQuery).cachedIn(viewModelScope)
+            repository.getSearchUserResultStream(lastQuery).cachedIn(viewModelScope)
 //                // viewType 나눌 때 활용하기
 //                .map { pagingData ->
 //                    pagingData.map { user -> user }
@@ -88,7 +89,7 @@ class GithubViewModel @Inject constructor(
         }
         summaryJob?.cancel()
         summaryJob = viewModelScope.launch {
-            repository.getTotalCountStream(currentQuery).collectLatest {
+            repository.getTotalCountStream(lastQuery).collectLatest {
                 _onSearchResultSummaryStream.emit(it)
             }
         }
