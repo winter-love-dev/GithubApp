@@ -6,7 +6,7 @@ import okhttp3.Response
 
 internal class HeaderSettingInterceptor : Interceptor {
 
-    val headerPair: List<Pair<String, String>> = listOf(
+    private val headerPair: List<Pair<String, String>> = listOf(
         "X-GitHub-Api-Version" to "2022-11-28",
         "Accept" to "application/vnd.github+json",
         "Authorization" to BuildConfig.GITHUB_REST_API_ACCESS_KEY,
