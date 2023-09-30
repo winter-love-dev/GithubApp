@@ -48,7 +48,7 @@ dependencies {
     androidTestImplementation(libs.bundles.default.test.androidTestImplementation)
     implementation(libs.bundles.kotlinx.serialization)
 
-    annotationProcessor(libs.bundles.glide.compiler.annotationProcessor)
+    kapt(libs.bundles.glide.compiler.annotationProcessor)
     implementation(libs.bundles.glide)
 
     implementation(libs.bundles.hilt)

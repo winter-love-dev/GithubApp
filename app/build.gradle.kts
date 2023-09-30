@@ -62,10 +62,10 @@ dependencies {
     implementation(libs.bundles.hilt)
     kapt(libs.bundles.hilt.compiler.kapt)
     ksp(libs.bundles.room.compiler.ksp)
-    annotationProcessor(libs.bundles.room.compiler.annotationProcessor)
+    ksp(libs.bundles.room.compiler.annotationProcessor)
     testImplementation(libs.bundles.room.testing.testImplementation)
     implementation(libs.bundles.room)
-    annotationProcessor(libs.bundles.glide.compiler.annotationProcessor)
+    ksp(libs.bundles.glide.compiler.annotationProcessor)
     implementation(libs.bundles.glide)
     implementation(libs.bundles.workmanager.all)
 
