@@ -39,7 +39,6 @@ class GithubUserSearchFragment: BaseFragment<FragmentGithubUserSearchBinding>(R.
     }
 
     override fun onDestroyView() {
-        // destroy 되기전에 캐시 날리기. 캐시 날리는 것보다 destroy 속도가 빠를 수 있을까?
         viewModel.clearSearchUserCache()
         super.onDestroyView()
     }
