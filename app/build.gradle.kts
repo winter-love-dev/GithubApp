@@ -67,12 +67,12 @@ dependencies {
     implementation(libs.bundles.room)
     ksp(libs.bundles.glide.compiler.annotationProcessor)
     implementation(libs.bundles.glide)
-    implementation(libs.bundles.workmanager.all)
 
+
+//    implementation(libs.bundles.workmanager.all)
 //    implementation(platform(libs.com.google.firebase.bom))
-// implementation(libs.bundles.firebase)
+//    implementation(libs.bundles.firebase)
 //    implementation(libs.bundles.compose.all)
-
 
 }
 
