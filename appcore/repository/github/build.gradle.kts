@@ -58,7 +58,7 @@ dependencies {
     kapt(libs.bundles.hilt.compiler.kapt)
 
     ksp(libs.bundles.room.compiler.ksp)
-    annotationProcessor(libs.bundles.room.compiler.annotationProcessor)
+    ksp(libs.bundles.room.compiler.annotationProcessor)
     testImplementation(libs.bundles.room.testing.testImplementation)
     implementation(libs.bundles.room)
 }
