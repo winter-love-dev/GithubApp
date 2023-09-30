@@ -3,7 +3,6 @@ package com.season.winter.githubapp.appcore.repository.github.network
 import com.season.winter.githubapp.appcore.repository.github.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
-import java.io.IOException
 
 internal class HeaderSettingInterceptor : Interceptor {
 
