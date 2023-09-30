@@ -1,21 +1,22 @@
 package com.season.winter.feature.github.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.season.winter.githubapp.appcore.domain.github.entity.GithubSearchResponse
 import com.season.winter.githubapp.appcore.domain.github.entity.GithubSearchUserSummaryEntity
 import com.season.winter.githubapp.appcore.domain.github.entity.GithubUserEntity
 import com.season.winter.githubapp.appcore.repository.github.GithubRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,26 +26,36 @@ class GithubViewModel @Inject constructor(
 ): ViewModel() {
 
 
-    private var _query = ""
-    val query: String get() = _query
+    private var currentQuery = ""
+    private var lastQuery = ""
 
     val onQueryChangeTextListener = fun(query: String) {
-        _query = query
-        Log.e(TAG, "onQueryChangeTextListener: $query" )
-        if (_query.isEmpty())
+        this.currentQuery = query
+        if (this.currentQuery.isEmpty())
             clearSearchUserCache()
     }
 
-    var _onClearedCache = MutableSharedFlow<Boolean>(
+    private var _onClearedCache = MutableSharedFlow<Boolean>(
         extraBufferCapacity = 1,
         onBufferOverflow = BufferOverflow.DROP_LATEST,
     )
     val onClearedCache: SharedFlow<Boolean>
         get() = _onClearedCache.asSharedFlow()
 
-    suspend fun searchUser(query: String): Flow<GithubSearchResponse> {
-        return repository.searchUser(query)
-    }
+    private val _onSearchResultStream = MutableSharedFlow<PagingData<GithubUserEntity>>(
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_LATEST,
+    )
+    val onSearchResultStream: SharedFlow<PagingData<GithubUserEntity>>
+        get() = _onSearchResultStream.asSharedFlow()
+
+    private val _onSearchResultSummaryStream = MutableStateFlow<GithubSearchUserSummaryEntity?>(null)
+    val onSearchResultSummaryStream: StateFlow<GithubSearchUserSummaryEntity?>
+        get() = _onSearchResultSummaryStream.asStateFlow()
+
+
+    private var summaryJob: Job? = null
+    private var searchJob: Job? = null
 
     fun updateLikedState(user: GithubUserEntity) {
         viewModelScope.launch {
@@ -52,19 +63,35 @@ class GithubViewModel @Inject constructor(
         }
     }
 
-    fun clearSearchUserCache(query: String = _query) {
+    fun clearSearchUserCache() {
+        searchJob?.cancel()
+        summaryJob?.cancel()
         viewModelScope.launch {
-            repository.clearSearchUserCache(query)
+            repository.clearSearchUserCache(lastQuery)
             _onClearedCache.emit(true)
         }
     }
 
-    fun getTotalCountStream(query: String = _query): Flow<GithubSearchUserSummaryEntity?> {
-        return repository.getTotalCountStream(query)
-    }
-
-    fun getSearchUserStream(query: String = _query): Flow<PagingData<GithubUserEntity>> {
-        return repository.getSearchUserResultStream(query).cachedIn(viewModelScope)
+    fun onClickSearchButton() {
+        lastQuery = currentQuery
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+            repository.getSearchUserResultStream(currentQuery).cachedIn(viewModelScope)
+//                // viewType 나눌 때 활용하기
+//                .map { pagingData ->
+//                    pagingData.map { user -> user }
+//                    pagingData
+//                }
+                .collectLatest {
+                    _onSearchResultStream.emit(it)
+                }
+        }
+        summaryJob?.cancel()
+        summaryJob = viewModelScope.launch {
+            repository.getTotalCountStream(currentQuery).collectLatest {
+                _onSearchResultSummaryStream.emit(it)
+            }
+        }
     }
 
     companion object {

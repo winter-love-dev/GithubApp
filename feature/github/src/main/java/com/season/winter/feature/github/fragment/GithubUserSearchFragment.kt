@@ -1,10 +1,7 @@
 package com.season.winter.feature.github.fragment
 
-import android.util.Log
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
-import androidx.paging.map
 import com.season.winter.core.common.extension.coroutine.repeatOnLifecycleJob
 import com.season.winter.core.common.fragment.BaseFragment
 import com.season.winter.core.common.util.LayoutManagerType
@@ -14,18 +11,11 @@ import com.season.winter.feature.github.databinding.FragmentGithubUserSearchBind
 import com.season.winter.feature.github.recyclerview.SearchGithubUserResultAdapter
 import com.season.winter.feature.github.viewmodel.GithubViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class GithubUserSearchFragment: BaseFragment<FragmentGithubUserSearchBinding>(R.layout.fragment_github_user_search) {
 
     val viewModel: GithubViewModel by activityViewModels()
-
-    private var summaryJob: Job? = null
-    private var searchJob: Job? = null
 
     override fun FragmentGithubUserSearchBinding.initViewCreated() {
         binding.setVariable(BR.fragment, this@GithubUserSearchFragment)
@@ -35,39 +25,16 @@ class GithubUserSearchFragment: BaseFragment<FragmentGithubUserSearchBinding>(R.
         adapter = SearchGithubUserResultAdapter(viewModel)
 
         repeatOnLifecycleJob(viewModel.onClearedCache) {
-            if (it) onClickClearResult()
-        }
-    }
-
-    fun onClickSearchButton() {
-        searchJob?.cancel()
-        searchJob = lifecycleScope.launch {
-            viewModel.getSearchUserStream()
-                .map { pagingData ->
-                    Log.e(TAG, "onClickSearchButton: pagingData: $pagingData")
-                    pagingData.map { user ->
-                        Log.e(TAG, "onClickSearchButton: user: $user")
-                        user
-                    }
-                    pagingData
-                }
-                .collectLatest {
-                    binding.adapter?.submitData(it)
-                }
-        }
-        summaryJob?.cancel()
-        summaryJob = lifecycleScope.launch {
-            viewModel.getTotalCountStream().collectLatest {
-                Log.e(TAG, "onClickSearchButton: summary: $it")
-                binding.count = if (it == null) "" else "total: ${it.totalCount}"
+            if (it) {
+                adapter?.submitData(PagingData.empty())
+                count = ""
             }
         }
-    }
-
-    fun onClickClearResult() {
-        lifecycleScope.launch {
-            binding.adapter?.submitData(PagingData.empty())
-            binding.count = ""
+        repeatOnLifecycleJob(viewModel.onSearchResultStream) {
+            adapter?.submitData(it)
+        }
+        repeatOnLifecycleJob(viewModel.onSearchResultSummaryStream) {
+            count = if (it == null) "" else "total: ${it.totalCount}"
         }
     }
 

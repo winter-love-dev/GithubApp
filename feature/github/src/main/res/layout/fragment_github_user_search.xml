@@ -57,7 +57,7 @@
         </LinearLayout>
 
         <Button
-            android:onClick="@{() -> fragment.onClickClearResult()}"
+            android:onClick="@{() -> github_view_model.clearSearchUserCache()}"
             android:layout_margin="20dp"
             android:layout_gravity="bottom|end"
             android:text="clear"
