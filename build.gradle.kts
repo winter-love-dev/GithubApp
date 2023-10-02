@@ -7,6 +7,5 @@ plugins {
     alias(libs.plugins.kotlin.kapt) apply false
     alias(libs.plugins.dagger.hilt) apply false
     alias(libs.plugins.devtools.ksp) apply false
-    alias(libs.plugins.gms.google.services) apply false
 }
 true // Needed to make the Suppress annotation work for the plugins block

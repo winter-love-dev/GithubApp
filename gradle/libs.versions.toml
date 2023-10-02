@@ -3,10 +3,13 @@ minSdk = "24"
 targetSdk = "34"
 compileSdk = "34"
 versionCode = "1"
-versionName = "1.0.0"
+major = "1"
+minor = "0"
+hotfix = "0"
+#versionName = "1.0.0"
 kotlinCompilerExtensionVersion = "1.4.3"
 
-android-gradle-plugin = "8.1.1"
+android-gradle-plugin = "8.1.2"
 android-material = "1.9.0"
 androidx-appcompat = "1.6.1"
 androidx-activity-ktx = "1.7.2"
@@ -38,7 +41,6 @@ com-google-github-bumptech-glide = "4.15.1"
 junit = "4.13.2" # testImplementation
 
 org-jetbrains-kotlin-android = "1.8.0"
-org-jetbrains-kotlin-plugin-serialization = "1.8.0"
 org-jetbrains-kotlinx-serialization-json = "1.5.1"
 
 # rest api
@@ -71,13 +73,17 @@ paging = "3.2.1"
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
-kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "org-jetbrains-kotlin-plugin-serialization" }
+kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "org-jetbrains-kotlin-android" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "org-jetbrains-kotlin-android" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "com-google-dagger-hilt-android-plugins" }
 devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "com-google-devtools-ksp" }
-gms-google-services = { id = "com.google.gms.google-services", version.ref = "com-google-gms-google-services" }
+#gms-google-services = { id = "com.google.gms.google-services", version.ref = "com-google-gms-google-services" }
 
 [libraries]
+plugin-agp = { module = "com.android.tools.build:gradle", version.ref = "android-gradle-plugin" }
+plugin-kgp = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "org-jetbrains-kotlin-android" }
+
+
 android-material = { module = "com.google.android.material:material", version.ref = "android-material" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity-ktx" }
