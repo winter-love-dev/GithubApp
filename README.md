@@ -11,8 +11,7 @@ And use [GitHub Rest API](https://docs.github.com/en/rest/search/search?apiVersi
 
 | Search Github User | Infinite Scroll | Like User |
 | :---------------: | :---------------: | :---------------: |
-| <img src="https://github.com/winter-love-dev/GithubApp/assets/26156815/25d02f99-0268-4274-b612-0718313b398a" align="center" width="250px"/> | <img src="https://github.com/winter-love-dev/GithubApp/assets/26156815/8551aad9-adff-440c-bc63-7ba78ce156d5" align="center" width="250px"/> | <img src="https://github.com/winter-love-dev/GithubApp/assets/26156815/38c553b6-78aa-4877-a575-ff8b96a792f5" align="center" width="250px"/> |
-
+| <img src="https://github.com/winter-love-dev/GithubApp/assets/26156815/38c553b6-78aa-4877-a575-ff8b96a792f5" align="center" width="250px"/> | <img src="https://github.com/winter-love-dev/GithubApp/assets/26156815/c94f6501-0989-4a44-9237-3d897c32cef1" align="center" width="250px"/> | <img src="https://github.com/winter-love-dev/GithubApp/assets/26156815/25d02f99-0268-4274-b612-0718313b398a" align="center" width="250px"/> |
 
 </div>
 
@@ -31,10 +30,9 @@ All library info : [libs.versions.toml](gradle/libs.versions.toml)
   - <b>Hilt</b> Dependency Injection
   - <b>Room</b>
     - Focused on implementing functionality by leveraging SQLite wrapped in an abstraction layer, and combined 'Flow' to implement UI interaction more easily.
-  - <b>Pagning3</b>
-    - <b>PagingSource</b> - Load network data to pagination
-    - <b>RemoteMediator</b>
-      - Apply Cache Process with Room. 
+  - <b>Pagning3</b> is Load large datasets efficiently
+    - <b>PagingSource</b> is Load network data to make pagination
+    - <b>RemoteMediator</b> - Apply Cache Process with Room
   - Network by <b>okhttp3 + retrofit2</b>
   
 ---
@@ -42,15 +40,19 @@ All library info : [libs.versions.toml](gradle/libs.versions.toml)
 
 ## [RemoteMediator](https://developer.android.com/topic/libraries/architecture/paging/v3-network-db) is use 'Paging3 + Room'. 
 It helps you navigate apps smoothly even in unstable internet environments.
-
 <img width="500" alt="remote_mediator_architrecture" src="https://github.com/winter-love-dev/GithubApp/assets/26156815/63e60a59-2003-47b2-b4b9-23980d866841">
 
+</br>
 
 ## MVVM Design pattern with Dependency Injection, Reference by [App Arhitecture Guide](https://developer.android.com/jetpack/guide?hl=ko#mobile-app-ux)  
 ![mvvm_example](https://github.com/winter-love-dev/CatchBottle/assets/26156815/f61d9746-f375-4cfa-80ea-20a3cb0ceafb)
 
+</br>
+
 ## Multi Module Architecture, Reference by [android/nowinandroid](https://github.com/android/nowinandroid)
 ![dep_graph_app](https://github.com/winter-love-dev/CatchBottle/assets/26156815/22cdd95a-29ee-4ea6-be8e-fe42ffeae5a2)
+
+</br>
 
 ## Domain Layer, Reference by [Domain Layer Docs](https://developer.android.com/topic/architecture/domain-layer)
 
