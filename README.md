@@ -1,6 +1,6 @@
 # GithubApp
 
-### This is a simple project that uses 'View UI' and '[Jetpack Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)'.
+### This is a simple project that uses 'Views UI' and '[Jetpack Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)'.
 
 And use [GitHub Rest API](https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28)
 
@@ -65,6 +65,17 @@ Work Focused
 - And code abstraction
 
 ![mad-arch-domain-overview](https://github.com/winter-love-dev/CatchBottle/assets/26156815/5997a25a-3d89-4314-8bb8-d7f5253c6faf)
+
+
+
+---
+# How to launch this project
+create your [access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+
+and input your access token in 'local.properties'
+
+<img width="793" alt="howtostart" src="https://github.com/winter-love-dev/GithubApp/assets/26156815/41dfaff9-121e-4ad6-8a21-bb279efab084">
+
 
 
 # License
