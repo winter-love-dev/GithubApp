@@ -40,6 +40,24 @@ All library info : [libs.versions.toml](gradle/libs.versions.toml)
 ---
 # Architecture
 
+## Multi Module Architecture, Reference by [android/nowinandroid](https://github.com/android/nowinandroid)
+<!-- ![dep_graph_app](https://github.com/winter-love-dev/CatchBottle/assets/26156815/22cdd95a-29ee-4ea6-be8e-fe42ffeae5a2) -->
+ 
+## Domain Layer, Reference by [Domain Layer Docs](https://developer.android.com/topic/architecture/domain-layer)
+</br>
+
+Work Focused
+- Define feature specification
+- Programming on the repository layer or feature layer, By domain layer specification.
+- Programming in ‘UseCase’ units
+- And code abstraction
+
+<!-- ![mad-arch-domain-overview](https://github.com/winter-love-dev/CatchBottle/assets/26156815/5997a25a-3d89-4314-8bb8-d7f5253c6faf) -->
+
+
+</br>
+
+
 ## [RemoteMediator](https://developer.android.com/topic/libraries/architecture/paging/v3-network-db) is use 'Paging3 + Room'. 
 It helps you navigate apps smoothly even in unstable internet environments.
 <img width="500" alt="remote_mediator_architrecture" src="https://github.com/winter-love-dev/GithubApp/assets/26156815/63e60a59-2003-47b2-b4b9-23980d866841">
@@ -50,22 +68,6 @@ It helps you navigate apps smoothly even in unstable internet environments.
 ![mvvm_example](https://github.com/winter-love-dev/CatchBottle/assets/26156815/f61d9746-f375-4cfa-80ea-20a3cb0ceafb)
 
 </br>
-
-## Multi Module Architecture, Reference by [android/nowinandroid](https://github.com/android/nowinandroid)
-![dep_graph_app](https://github.com/winter-love-dev/CatchBottle/assets/26156815/22cdd95a-29ee-4ea6-be8e-fe42ffeae5a2)
-
-</br>
-
-## Domain Layer, Reference by [Domain Layer Docs](https://developer.android.com/topic/architecture/domain-layer)
-
-Work Focused
-- Define feature specification
-- Programming on the repository layer or feature layer, By domain layer specification.
-- Programming in ‘UseCase’ units
-- And code abstraction
-
-![mad-arch-domain-overview](https://github.com/winter-love-dev/CatchBottle/assets/26156815/5997a25a-3d89-4314-8bb8-d7f5253c6faf)
-
 
 
 ---
