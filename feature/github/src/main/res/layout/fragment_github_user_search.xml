@@ -6,17 +6,12 @@
     <data>
 
         <import type="com.season.winter.feature.github.recyclerview.SearchGithubUserResultAdapter" />
-        <import type="com.season.winter.core.common.util.LayoutManagerType" />
         <import type="com.season.winter.feature.github.fragment.GithubUserSearchFragment"/>
         <import type="com.season.winter.feature.github.viewmodel.GithubViewModel"/>
 
         <variable
             name="adapter"
             type="SearchGithubUserResultAdapter" />
-
-        <variable
-            name="layoutManagerType"
-            type="LayoutManagerType" />
 
         <variable
             name="fragment"
@@ -44,12 +39,11 @@
             <include layout="@layout/item_search_bar"
                 app:count="@{count}"
                 app:fragment="@{fragment}"/>
-            <!--        app:search_bar_view_model="@{github_view_model}"-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_weight="1"
-                app:changeLayoutManagerFromType="@{layoutManagerType}"
                 app:adapter="@{adapter}"
+                app:layoutManager="LinearLayoutManager"
                 tools:listitem="@layout/item_search_user"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"/>

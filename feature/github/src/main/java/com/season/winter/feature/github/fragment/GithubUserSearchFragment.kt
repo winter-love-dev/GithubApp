@@ -4,7 +4,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.paging.PagingData
 import com.season.winter.core.common.extension.coroutine.repeatOnLifecycleJob
 import com.season.winter.core.common.fragment.BaseFragment
-import com.season.winter.core.common.util.LayoutManagerType
 import com.season.winter.feature.github.BR
 import com.season.winter.feature.github.R
 import com.season.winter.feature.github.databinding.FragmentGithubUserSearchBinding
@@ -21,7 +20,6 @@ class GithubUserSearchFragment: BaseFragment<FragmentGithubUserSearchBinding>(R.
         binding.setVariable(BR.fragment, this@GithubUserSearchFragment)
         binding.setVariable(BR.github_view_model, viewModel)
 
-        layoutManagerType = LayoutManagerType.Linear
         adapter = SearchGithubUserResultAdapter(viewModel)
 
         repeatOnLifecycleJob(viewModel.onClearedCache) {
