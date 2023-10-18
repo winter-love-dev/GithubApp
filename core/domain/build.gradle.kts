@@ -4,11 +4,10 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.dagger.hilt)
 }
 
 android {
-    namespace = "com.season.winter.feature.github"
+    namespace = "com.season.winter.githubapp.core.domain"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -34,28 +33,18 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
-    dataBinding {
-        enable = true
-    }
 }
 
 dependencies {
 
-    implementation(project(":core:common"))
-    implementation(project(":core:domain"))
-    implementation(project(":core:data"))
-
     implementation(libs.bundles.default)
-    implementation(libs.bundles.default.screen)
     testImplementation(libs.bundles.default.test.implementation)
     androidTestImplementation(libs.bundles.default.test.androidTestImplementation)
-    implementation(libs.bundles.kotlinx.serialization)
-
-    implementation(libs.bundles.navigation)
-
-    implementation(libs.bundles.hilt)
-    kapt(libs.bundles.hilt.compiler.kapt)
 
     implementation(libs.bundles.rest.api)
 
+    ksp(libs.bundles.room.compiler.ksp)
+    ksp(libs.bundles.room.compiler.annotationProcessor)
+    testImplementation(libs.bundles.room.testing.testImplementation)
+    implementation(libs.bundles.room)
 }

@@ -20,6 +20,6 @@ include(":core:common")
 
 include(":feature")
 
-include(":appcore:domain:github")
-include(":appcore:repository:github")
 include(":feature:github")
+include(":core:data")
+include(":core:domain")
