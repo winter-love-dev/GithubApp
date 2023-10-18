@@ -19,19 +19,13 @@ enum class FlowCollect {
 fun <T> LifecycleOwner.repeatOnLifecycleJob(
     flow: Flow<T>?,
     repeatWhen: Lifecycle.State = Lifecycle.State.STARTED,
-    collect: FlowCollect = FlowCollect.Collect,
     callback: suspend LifecycleOwner.(item: T) -> Unit,
 //    callback: suspend LifecycleOwner.(index: Int, item: T) -> Unit,
 ): Job {
     return lifecycleScope.launch {
         repeatOnLifecycle(repeatWhen) {
-            when(collect) {
-                FlowCollect.Collect -> flow?.collect {
-                    callback(it)
-                }
-                FlowCollect.CollectLatest -> flow?.collectLatest {
-                    callback(it)
-                }
+            flow?.collect {
+                callback(it)
             }
         }
     }

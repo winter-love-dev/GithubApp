@@ -1,7 +1,7 @@
 package com.season.winter.feature.github.recyclerview
 
 import androidx.recyclerview.widget.DiffUtil
-import com.season.winter.githubapp.appcore.domain.github.entity.GithubUserEntity
+import com.season.winter.githubapp.core.domain.entity.GithubUserEntity
 
 class GithubUserDiffCallback: DiffUtil.ItemCallback<GithubUserEntity>() {
 

@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import com.season.winter.feature.github.recyclerview.holder.SearchUserViewHolder
 import com.season.winter.feature.github.viewmodel.GithubViewModel
-import com.season.winter.githubapp.appcore.domain.github.entity.GithubUserEntity
+import com.season.winter.githubapp.core.domain.entity.GithubUserEntity
 
 
 class SearchGithubUserResultAdapter(

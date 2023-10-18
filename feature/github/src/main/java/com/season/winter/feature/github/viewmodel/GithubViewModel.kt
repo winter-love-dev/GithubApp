@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.season.winter.githubapp.appcore.domain.github.entity.GithubSearchUserSummaryEntity
-import com.season.winter.githubapp.appcore.domain.github.entity.GithubUserEntity
-import com.season.winter.githubapp.appcore.repository.github.GithubRepository
+import com.season.winter.githubapp.core.data.GithubRepository
+import com.season.winter.githubapp.core.domain.entity.GithubSearchUserSummaryEntity
+import com.season.winter.githubapp.core.domain.entity.GithubUserEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.BufferOverflow
@@ -52,7 +52,6 @@ class GithubViewModel @Inject constructor(
     val onSearchResultSummaryStream: StateFlow<GithubSearchUserSummaryEntity?>
         get() = _onSearchResultSummaryStream.asStateFlow()
 
-
     private var summaryJob: Job? = null
     private var searchJob: Job? = null
 
@@ -63,7 +62,7 @@ class GithubViewModel @Inject constructor(
     }
 
     fun clearSearchUserCache() {
-        if (lastQuery.isEmpty()) return
+//        if (lastQuery.isEmpty()) return
         searchJob?.cancel()
         summaryJob?.cancel()
         viewModelScope.launch {
@@ -74,8 +73,10 @@ class GithubViewModel @Inject constructor(
     }
 
     fun onClickSearchButton() {
+        if (currentQuery.isEmpty()) return
+        clearSearchUserCache()
         lastQuery = currentQuery
-        searchJob?.cancel()
+//        searchJob?.cancel()
         searchJob = viewModelScope.launch {
             repository.getSearchUserResultStream(lastQuery).cachedIn(viewModelScope)
 //                // viewType 나눌 때 활용하기
@@ -87,7 +88,7 @@ class GithubViewModel @Inject constructor(
                     _onSearchResultStream.emit(it)
                 }
         }
-        summaryJob?.cancel()
+//        summaryJob?.cancel()
         summaryJob = viewModelScope.launch {
             repository.getTotalCountStream(lastQuery).collectLatest {
                 _onSearchResultSummaryStream.emit(it)

@@ -4,8 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.season.winter.feature.github.databinding.ItemSearchUserBinding
-import com.season.winter.feature.github.viewmodel.GithubViewModel
-import com.season.winter.githubapp.appcore.domain.github.entity.GithubUserEntity
+import com.season.winter.githubapp.core.domain.entity.GithubUserEntity
 
 class SearchUserViewHolder(
     parent: ViewGroup,
