@@ -3,7 +3,6 @@ package com.season.winter.githubapp.core.data.paging
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.season.winter.githubapp.core.data.paging.test.BaseRemoteMediator.Companion.PageLimit
 import com.season.winter.githubapp.core.domain.GithubLocalDao
 import com.season.winter.githubapp.core.domain.GithubApi
 import com.season.winter.githubapp.core.domain.entity.GithubUserEntity
@@ -62,4 +61,9 @@ class GithubPagingSource(
         }
     }
 
+
+    companion object {
+
+        const val PageLimit = 30
+    }
 }

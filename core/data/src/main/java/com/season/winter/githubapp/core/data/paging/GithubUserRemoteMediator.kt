@@ -6,7 +6,6 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.season.winter.githubapp.core.data.database.GithubLocalDatabase
-import com.season.winter.githubapp.core.data.paging.test.BaseRemoteMediator.Companion.PageLimit
 import com.season.winter.githubapp.core.domain.GithubApi
 import com.season.winter.githubapp.core.domain.entity.GithubSearchUserSummaryEntity
 import com.season.winter.githubapp.core.domain.entity.GithubUserEntity
@@ -115,5 +114,11 @@ class GithubUserRemoteMediator(
         } catch (e: HttpException) {
             MediatorResult.Error(e)
         }
+    }
+
+
+    companion object {
+
+        const val PageLimit = 30
     }
 }
