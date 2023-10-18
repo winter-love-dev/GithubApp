@@ -8,25 +8,22 @@ import androidx.room.withTransaction
 import com.season.winter.githubapp.core.data.database.GithubLocalDatabase
 import com.season.winter.githubapp.core.data.paging.GithubUserRemoteMediator
 import com.season.winter.githubapp.core.data.paging.test.BaseRemoteMediator.Companion.PageLimit
-import com.season.winter.githubapp.core.domain.GithubRestApiService
+import com.season.winter.githubapp.core.domain.GithubApi
+import com.season.winter.githubapp.core.domain.GithubRepository
 import com.season.winter.githubapp.core.domain.entity.GithubSearchUserSummaryEntity
 import com.season.winter.githubapp.core.domain.entity.GithubUserEntity
 import com.season.winter.githubapp.core.domain.entity.GithubUserLikeEntity
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import javax.inject.Inject
 
-class GithubRepository @Inject constructor(
-    private val remoteDao: GithubRestApiService,
+class GithubRepositoryImpl(
+    private val remoteDao: GithubApi,
     private val database: GithubLocalDatabase,
-) {
+): GithubRepository {
 
     private val userDao = database.githubDao()
     private val remoteKeyDao = database.remoteKeyDao()
 
-    suspend fun updateLikedState(user: GithubUserEntity) {
+    override suspend fun updateLikedState(user: GithubUserEntity) {
         val id = user.id ?: return
         userDao.updateLikedState(
             GithubUserLikeEntity(
@@ -36,7 +33,7 @@ class GithubRepository @Inject constructor(
         )
     }
 
-    suspend fun clearSearchUserCache(query: String) {
+    override suspend fun clearSearchUserCache(query: String) {
         database.withTransaction {
             remoteKeyDao.deleteByQuery(query)
             userDao.deleteUserUseQuery(query)
@@ -44,23 +41,18 @@ class GithubRepository @Inject constructor(
         }
     }
 
-    fun getTotalCountStream(query: String): Flow<GithubSearchUserSummaryEntity?> {
+    override fun getTotalCountStream(query: String): Flow<GithubSearchUserSummaryEntity?> {
         return userDao.checkSearchSummaryStream(query)
     }
 
-    suspend fun searchUser(query: String) = flow {
-        val result = remoteDao.searchUser(query, PageLimit, 1)
-        emit(result)
-    }.flowOn(Dispatchers.IO)
-
     @OptIn(ExperimentalPagingApi::class)
-    fun getSearchUserResultStream(query: String): Flow<PagingData<GithubUserEntity>> {
+    override fun getSearchUserResultStream(query: String): Flow<PagingData<GithubUserEntity>> {
         return Pager(
             config = PagingConfig(pageSize = PageLimit),
             remoteMediator = GithubUserRemoteMediator(query, database, remoteDao,),
-            // pagingSourceFactory = { localDao.userPagingSource(query) }
         ) {
             userDao.userPagingSource(query)
         }.flow
     }
+
 }

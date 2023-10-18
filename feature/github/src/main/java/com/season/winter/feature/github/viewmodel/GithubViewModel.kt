@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.season.winter.githubapp.core.data.GithubRepository
+import com.season.winter.githubapp.core.domain.GithubRepository
 import com.season.winter.githubapp.core.domain.entity.GithubSearchUserSummaryEntity
 import com.season.winter.githubapp.core.domain.entity.GithubUserEntity
 import dagger.hilt.android.lifecycle.HiltViewModel

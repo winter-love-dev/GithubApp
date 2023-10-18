@@ -1,7 +1,7 @@
 package com.season.winter.githubapp.core.data.di
 
 import com.season.winter.githubapp.core.data.network.GithubRestApiManager
-import com.season.winter.githubapp.core.domain.GithubRestApiService
+import com.season.winter.githubapp.core.domain.GithubApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +14,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideUnsplashService(): GithubRestApiService {
+    fun provideGithubApiService(): GithubApi {
         return GithubRestApiManager.create()
     }
 }

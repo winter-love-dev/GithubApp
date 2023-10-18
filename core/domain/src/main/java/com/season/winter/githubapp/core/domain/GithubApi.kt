@@ -4,7 +4,7 @@ import com.season.winter.githubapp.core.domain.entity.GithubSearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface GithubRestApiService {
+interface GithubApi {
 
     @GET("search/users")
     suspend fun searchUser(

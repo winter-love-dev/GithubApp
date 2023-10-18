@@ -5,14 +5,14 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.season.winter.githubapp.core.data.paging.test.BaseRemoteMediator.Companion.PageLimit
 import com.season.winter.githubapp.core.domain.GithubLocalDao
-import com.season.winter.githubapp.core.domain.GithubRestApiService
+import com.season.winter.githubapp.core.domain.GithubApi
 import com.season.winter.githubapp.core.domain.entity.GithubUserEntity
 import kotlin.math.ceil
 
 const val STARTING_PAGING_INDEX = 1
 
 class GithubPagingSource(
-    private val service: GithubRestApiService,
+    private val service: GithubApi,
     private val query: String,
     private val localDao: GithubLocalDao,
 ) : PagingSource<Int, GithubUserEntity>()  {

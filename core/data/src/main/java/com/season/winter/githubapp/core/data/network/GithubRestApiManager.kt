@@ -1,7 +1,7 @@
 package com.season.winter.githubapp.core.data.network
 
 import com.season.winter.githubapp.core.data.BuildConfig
-import com.season.winter.githubapp.core.domain.GithubRestApiService
+import com.season.winter.githubapp.core.domain.GithubApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,7 +12,7 @@ object GithubRestApiManager {
 
     private const val TimeoutSecond = 10L // default okhttp.connectTimeout = 10L
 
-    fun create(): GithubRestApiService {
+    fun create(): GithubApi {
         val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
 
         val client = OkHttpClient.Builder()
@@ -28,6 +28,6 @@ object GithubRestApiManager {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(GithubRestApiService::class.java)
+            .create(GithubApi::class.java)
     }
 }
