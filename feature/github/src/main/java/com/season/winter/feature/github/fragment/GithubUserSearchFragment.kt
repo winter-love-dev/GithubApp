@@ -10,11 +10,17 @@ import com.season.winter.feature.github.databinding.FragmentGithubUserSearchBind
 import com.season.winter.feature.github.recyclerview.SearchGithubUserResultAdapter
 import com.season.winter.feature.github.viewmodel.GithubViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class GithubUserSearchFragment: BaseFragment<FragmentGithubUserSearchBinding>(R.layout.fragment_github_user_search) {
 
-    val viewModel: GithubViewModel by activityViewModels()
+    @Inject
+    lateinit var githubViewModelFactory: GithubViewModel.GithubViewModelAssistedFactory
+
+    val viewModel by activityViewModels<GithubViewModel> {
+        GithubViewModel.provideFactory(githubViewModelFactory, false)
+    }
 
     override fun FragmentGithubUserSearchBinding.initViewCreated() {
         binding.setVariable(BR.fragment, this@GithubUserSearchFragment)

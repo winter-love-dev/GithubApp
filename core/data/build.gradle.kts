@@ -49,8 +49,6 @@ dependencies {
     implementation(project(":core:domain"))
 
     implementation(libs.bundles.default)
-    testImplementation(libs.bundles.default.test.implementation)
-    androidTestImplementation(libs.bundles.default.test.androidTestImplementation)
 
     implementation(libs.bundles.rest.api)
 
@@ -59,8 +57,10 @@ dependencies {
 
     ksp(libs.bundles.room.compiler.ksp)
     ksp(libs.bundles.room.compiler.annotationProcessor)
-    testImplementation(libs.bundles.room.testing.testImplementation)
     implementation(libs.bundles.room)
+
+    testImplementation(libs.bundles.room.testing.testImplementation)
+    testImplementation(libs.bundles.test.unit)
 }
 
 fun getGithubRestApiAccess(): String {

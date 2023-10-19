@@ -1,5 +1,6 @@
 package com.season.winter.githubapp.core.data
 
+import androidx.annotation.VisibleForTesting
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -7,7 +8,7 @@ import androidx.paging.PagingData
 import androidx.room.withTransaction
 import com.season.winter.githubapp.core.data.database.GithubLocalDatabase
 import com.season.winter.githubapp.core.data.paging.GithubUserRemoteMediator
-import com.season.winter.githubapp.core.data.paging.test.BaseRemoteMediator.Companion.PageLimit
+import com.season.winter.githubapp.core.data.paging.GithubUserRemoteMediator.Companion.PageLimit
 import com.season.winter.githubapp.core.domain.GithubApi
 import com.season.winter.githubapp.core.domain.GithubRepository
 import com.season.winter.githubapp.core.domain.entity.GithubSearchUserSummaryEntity
@@ -20,8 +21,11 @@ class GithubRepositoryImpl(
     private val database: GithubLocalDatabase,
 ): GithubRepository {
 
-    private val userDao = database.githubDao()
-    private val remoteKeyDao = database.remoteKeyDao()
+    @VisibleForTesting
+    val userDao = database.githubDao()
+
+    @VisibleForTesting
+    val remoteKeyDao = database.remoteKeyDao()
 
     override suspend fun updateLikedState(user: GithubUserEntity) {
         val id = user.id ?: return

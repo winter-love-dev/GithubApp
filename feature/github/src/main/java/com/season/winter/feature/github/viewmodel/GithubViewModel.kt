@@ -1,12 +1,17 @@
 package com.season.winter.feature.github.viewmodel
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.season.winter.githubapp.core.domain.GithubRepository
 import com.season.winter.githubapp.core.domain.entity.GithubSearchUserSummaryEntity
 import com.season.winter.githubapp.core.domain.entity.GithubUserEntity
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.BufferOverflow
@@ -19,14 +24,24 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Named
 
-@HiltViewModel
-class GithubViewModel @Inject constructor(
+class GithubViewModel @AssistedInject constructor(
     private val repository: GithubRepository,
+    @Assisted isTest: Boolean = false,
 ): ViewModel() {
 
-    private var currentQuery = ""
-    private var lastQuery = ""
+    @VisibleForTesting
+    var currentQuery = ""
+
+    @VisibleForTesting
+    var lastQuery = ""
+
+    @VisibleForTesting
+    var summaryJob: Job? = null
+
+    @VisibleForTesting
+    var searchJob: Job? = null
 
     val onQueryChangeTextListener = fun(query: String) {
         currentQuery = query
@@ -45,15 +60,14 @@ class GithubViewModel @Inject constructor(
         extraBufferCapacity = 1,
         onBufferOverflow = BufferOverflow.DROP_LATEST,
     )
+
+
     val onSearchResultStream: SharedFlow<PagingData<GithubUserEntity>>
         get() = _onSearchResultStream.asSharedFlow()
 
     private val _onSearchResultSummaryStream = MutableStateFlow<GithubSearchUserSummaryEntity?>(null)
     val onSearchResultSummaryStream: StateFlow<GithubSearchUserSummaryEntity?>
         get() = _onSearchResultSummaryStream.asStateFlow()
-
-    private var summaryJob: Job? = null
-    private var searchJob: Job? = null
 
     fun updateLikedState(user: GithubUserEntity) {
         viewModelScope.launch {
@@ -96,8 +110,26 @@ class GithubViewModel @Inject constructor(
         }
     }
 
+    @AssistedFactory
+    interface GithubViewModelAssistedFactory {
+
+        fun create(@Named("is_test") isTest: Boolean): GithubViewModel
+    }
+
     companion object {
 
         const val TAG = "GithubViewModel"
+
+        fun provideFactory(
+            assistedFactory: GithubViewModelAssistedFactory,
+            isTest: Boolean,
+        ): ViewModelProvider.Factory =
+            object : ViewModelProvider.Factory {
+
+                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                    @Suppress("UNCHECKED_CAST")
+                    return assistedFactory.create(isTest) as T
+                }
+            }
     }
 }

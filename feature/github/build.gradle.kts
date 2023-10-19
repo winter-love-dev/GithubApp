@@ -47,8 +47,6 @@ dependencies {
 
     implementation(libs.bundles.default)
     implementation(libs.bundles.default.screen)
-    testImplementation(libs.bundles.default.test.implementation)
-    androidTestImplementation(libs.bundles.default.test.androidTestImplementation)
     implementation(libs.bundles.kotlinx.serialization)
 
     implementation(libs.bundles.navigation)
@@ -58,4 +56,5 @@ dependencies {
 
     implementation(libs.bundles.rest.api)
 
+    testImplementation(libs.bundles.test.unit)
 }
